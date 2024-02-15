@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="main_layout.html">
+<div layout:fragment="sideContent">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Deadline Date</th>
+            <th>Is Completed</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each  = " task : ${tasktar}" >
+            <td th:text = "${task.id}"></td>
+            <td th:text = "${task.name}"></td>
+            <td th:text = "${task.deadline}"></td>
+            <td th:text = "${task.completed}"></td>
+            <td>
+                <a th:href="@{'/task-details?id=' + ${task.id}}" class="btn btn-primary">MORE</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>

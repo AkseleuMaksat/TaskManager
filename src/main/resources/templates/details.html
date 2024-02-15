@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="main_layout.html">
+<div layout:fragment="sideContent">
+        <div class="row">
+            <div class="col-5 m-auto">
+                <form action="/save-task" method="post" th:if="${task!=null}">
+                    <input type="hidden" name="id" th:value = "${task.id}">
+                    <div class="mt-2">
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input type="text" class="form-control" name="name" th:value="${task.name}" required>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div class="form-group">
+                            <label>Deadline:</label>
+                            <input type="date"  class="form-control" name ="deadline" th:value="${task.deadline}" required>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div>
+                            <label>Completed:</label>
+                            <select class="form-control" name ="completed" th:value="${task.completed}" required>
+                                <option>YES</option>
+                                <option>NO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div>
+                            <label>DETAILS:</label>
+                            <input type="text"  class="form-control form-control-lg" name ="description" th:value="${task.description}" required>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <div>
+                            <button class="btn btn-primary">SAVE MUSIC</button>
+                            <button type="button" class="btn btn-danger ms-2" data-bs-toggle="modal" data-bs-target="#exampleModal">DELETE</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" th:if="${task!=null}" >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action ="/delete-task" method="POST">
+                                <input type="hidden" name="id"  th:value = "${task.id}" >
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">DELETE</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h3>ARE YOU SURE ?</h3>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                                    <button class="btn btn-danger">YES</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <h5 th:if="${task==null}" class="text-center">Task not found</h5>
+            </div>
+        </div>
+</div>
+</html>
